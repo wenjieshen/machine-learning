@@ -14262,11 +14262,11 @@ I attempt all features to predict. The prediction score is recorded below.<br></
 </tbody>
 </table>
 <ol>
-<li>Detergents_Paper feature was predicted.</li>
+<li>I attempt to predict Detergents_Paper.</li>
 <li>The reported prediction score was 0.6817</li>
-<li>Yes, Detergents_Paper is necessary for identifying customer's spending habits because customers as restaurant just spend Detergents_Paper for themselves, and customers as retail store sell Detergents_Paper.</li>
+<li>Detergents_Paper seems like unnecessary for identifying customer's spending habits because Detergents_Paper can be easily predicted from other feature; Detergents_Paper doesn't provide many additional relevance informations.</li>
 </ol>
-<p>All features might be necessary for identifying although some feature seem seem unrelated to other features. It needs more imformations and processing to decide because relevance and usefulness are different. As the histograms of features above, I thought some features, whose scores are greater than zero, are more lucky when all features never been scaled because whose distributions are also skewed.</p>
+<p>But, in my opinion, all features might be necessary for identifying although some feature seem seem unrelated to other features. It needs more imformations and processing to decide because relevance and usefulness are different. As the histograms of features above, I thought some features, whose scores are greater than zero, are more lucky when all features never been scaled because whose distributions are also skewed.</p>
 
 </div>
 </div>
@@ -17267,8 +17267,7 @@ QgghWvP/ANbSc/T0GPmGAAAAAElFTkSuQmCC
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p><strong>Answer:</strong><br>
-There is pair of Detergents_Paper and Grocery which exhibit some degree of correlation. This confirm my suspicions about the relevance of the feature I attempted to predict, the customers always sell Grocery when the customers sell Detergents_Paper.
-There are just few pairs of features which may seem like exhibiting some degree of correiation. But, this confirm my suspicions about the relevance of the featues. As mentioned earlier, This relevance is incredibility because the data is not normally distributed. Most of the data points lie on left.</p>
+There is pair of Detergents_Paper and Grocery which exhibit some degree of correlation. This might confirm my  suspicions about the relevance of the 'Detergents_Paper' feature I attempted to predict because 'Detergents_Paper' might be redundant to some extent of 'Grocery'. As mentioned earlier, This relevance is incredibility because the data is not normally distributed. Most of the data points lie on right.</p>
 
 </div>
 </div>
@@ -27024,7 +27023,7 @@ DxgQPOpvIK7iAAAAAElFTkSuQmCC
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p><strong>Answer:</strong><br>
-Almost 10 percent of data points considered outliers for more than one feature based on the definition above. There are just a part of these data points should definitely be removed from the dataset because the data points affect multiple features, the figure above shows the skewing is fixed but fresh by removing outliers. The visualization and comparison of original data and processed data above show that the pairwise correlation of columns became more distinct.</p>
+Almost 1.136%(5) of data points considered outliers for geater than one feature based on the definition above. These data points should definitely be removed from the dataset because the data points seriously affect the distribution of data. The figure above shows the skewing is fixed by removing outliers. The visualization and comparison of original data and processed data above show that the pairwise correlation of columns became quite distinct.</p>
 
 </div>
 </div>
