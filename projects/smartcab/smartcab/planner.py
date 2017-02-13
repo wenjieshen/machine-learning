@@ -23,7 +23,7 @@ class RoutePlanner(object):
         heading = self.env.agent_states[self.agent]['heading']
 
         delta_a = (self.destination[0] - location[0], self.destination[1] - location[1])
-        delta_b = (bounds[0] + delta_a[0] if delta_a[0] <= 0 else delta_a[0] - bounds[0], \
+        delta_b = (bounds[0] + delta_a[0] if delta_a[0] <= 0 else delta_a[0] - bounds[0],
                    bounds[1] + delta_a[1] if delta_a[1] <= 0 else delta_a[1] - bounds[1])
 
         # Calculate true difference in location based on world-wrap
