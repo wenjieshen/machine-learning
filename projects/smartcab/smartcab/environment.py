@@ -164,7 +164,6 @@ class Environment(object):
                 if positions[intersection] == list(): # No headings available for intersection
                     del positions[intersection] # Delete the intersection altogether
 
-    
             agent.reset(destination=(destination if agent is self.primary_agent else None), testing=testing)
             if agent is self.primary_agent:
                 # Reset metrics for this trial (step data will be set during the step)
