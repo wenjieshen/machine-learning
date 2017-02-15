@@ -112,8 +112,8 @@ class LearningAgent(Agent):
         # When learning, implement the value iteration update rule
         #   Use only the learning rate 'alpha' (do not use the discount factor 'gamma')
         q_for_state = self.Q[state]
-        max_q_value = q_for_state[max(q_for_state, key=lambda i:q_for_state[i])]
-        q_for_state[action] += self.alpha * (reward + max_q_value - q_for_state[action])
+        q_for_state[action] += self.alpha * (reward - q_for_state[action])
+
         return
 
     def update(self):
