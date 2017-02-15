@@ -69,7 +69,8 @@ class LearningAgent(Agent):
         # Calculate the maximum Q-value of all actions for a given state
         q_for_state = self.Q[state]
         max_q = max(q_for_state, key=lambda i: q_for_state[i])
-
+        if q_for_state[max_q] == 0.0: # Q never be updated
+            max_q = random.choice(self.valid_actions)
         return max_q
 
     def create_q(self, state):
@@ -140,7 +141,7 @@ def run():
     #   verbose     - set to True to display additional output from the simulation
     #   num_dummies - discrete number of dummy agents in the environment, default is 100
     #   grid_size   - discrete number of intersections (columns, rows), default is (8, 6)
-    env = Environment(verbose=True)
+    env = Environment(verbose=False)
     
     ##############
     # Create the driving agent
