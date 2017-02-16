@@ -58,8 +58,11 @@ class LearningAgent(Agent):
 
         # Set 'state' as a tuple of relevant data for the agent
         state = (waypoint,)
-        for _, v in inputs.iteritems():
-            state += (v,)
+        for k, v in inputs.iteritems():
+            # if k != 'oncoming' and k != 'left' and k != 'right' :
+            # if k != 'right':
+            if k != 'left' and k != 'right':
+                state += (v,)
         return state
 
     def get_max_q(self, state):
