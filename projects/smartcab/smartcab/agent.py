@@ -177,8 +177,8 @@ def run():
     #    * alpha   - continuous value for the learning rate, default is 0.5
     #    * a       - continuous value for the decay factor, default is 0.05
 
-    # agent = env.create_agent(LearningAgent, True, epsilon=1, alpha=0.6, a=a, decay='exp')
-    agent = env.create_agent(LearningAgent, True)
+    agent = env.create_agent(LearningAgent, True, epsilon=1, alpha=0.6, a=a, decay='exp')
+    # agent = env.create_agent(LearningAgent, True)
     ##############
     # Follow the driving agent
     # Flags:
@@ -192,14 +192,14 @@ def run():
     #   display      - set to False to disable the GUI if PyGame is enabled
     #   log_metrics  - set to True to log trial and simulation results to /logs
     #   optimized    - set to True to change the default log file name
-    sim = Simulator(env, display=False, update_delay=0.0, log_metrics=True, optimized=False)
+    sim = Simulator(env, display=False, update_delay=0.0, log_metrics=True, optimized=True)
     
     ##############
     # Run the simulator
     # Flags:
     #   tolerance  - epsilon tolerance before beginning testing, default is 0.05 
     #   n_test     - discrete number of testing trials to perform, default is 0
-    sim.run(n_test=10, tolerance=0.05)
+    sim.run(n_test=200, tolerance=0.05)
 
 
 if __name__ == '__main__':
