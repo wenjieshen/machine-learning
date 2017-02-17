@@ -9,7 +9,7 @@ class LearningAgent(Agent):
     """ An agent that learns to drive in the Smartcab world.
         This is the object you will be modifying. """
 
-    def __init__(self, env, learning=False, epsilon=1.0, alpha=0.5, a=0.05):
+    def __init__(self, env, learning=False, epsilon=1.0, alpha=0.5, a=0.05, decay=None):
         super(LearningAgent, self).__init__(env)     # Set the agent in the environment
         self.planner = RoutePlanner(self.env, self)  # Create a route planner
         self.valid_actions = self.env.valid_actions  # The set of valid actions
@@ -21,20 +21,31 @@ class LearningAgent(Agent):
         self.alpha = alpha       # Learning factor
 
         # Set any additional class parameters as needed
+        self.decay_epsilon_func = dict()
+        self.decay_epsilon_func[None] = self.decay_epsilon
+        self.decay_epsilon_func['exp'] = self.decay_epsilon_exp
+        self.decay_epsilon_func['inv'] = self.decay_epsilon_inv_t
+        self.decay_epsilon_func['cos'] = self.decay_epsilon_cos
+        self.decay = decay
         self.a = a
-        self.t = 1.0
+        self.t = 0.0
 
     def decay_epsilon(self):
-        self.epsilon -= a
+        self.epsilon -= self.a
         return None
 
     def decay_epsilon_exp(self):
         self.epsilon = math.exp(-1*self.a*self.t)
-        self.t += 1
+        self.t += 1.0
         return None
 
     def decay_epsilon_inv_t(self):
-        self.epsilon = 1/(self.t*self.t)
+        self.epsilon = 1/self.t**2
+        self.t += 1
+        return None
+
+    def decay_epsilon_cos(self):
+        self.epsilon = math.cos(self.a*self.t)
         self.t += 1
         return None
 
@@ -52,7 +63,7 @@ class LearningAgent(Agent):
         if testing is True:
             self.epsilon = 0
         else:
-            self.decay_epsilon_exp()
+            self.decay_epsilon_func[self.decay]()
         return None
 
     def build_state(self):
@@ -152,7 +163,12 @@ def run():
     #   num_dummies - discrete number of dummy agents in the environment, default is 100
     #   grid_size   - discrete number of intersections (columns, rows), default is (8, 6)
     env = Environment(verbose=False)
-    
+
+    # Turning decay factor
+    expected_t = 300.0
+    # a = (math.pi/2.0)/expected_t
+    a = 3 / expected_t
+
     ##############
     # Create the driving agent
     # Flags:
@@ -160,8 +176,9 @@ def run():
     #    * epsilon - continuous value for the exploration factor, default is 1
     #    * alpha   - continuous value for the learning rate, default is 0.5
     #    * a       - continuous value for the decay factor, default is 0.05
-    agent = env.create_agent(LearningAgent, True, epsilon=1, alpha=0.6, a=0.025)
-    
+
+    # agent = env.create_agent(LearningAgent, True, epsilon=1, alpha=0.6, a=a, decay='exp')
+    agent = env.create_agent(LearningAgent, True)
     ##############
     # Follow the driving agent
     # Flags:
@@ -175,14 +192,14 @@ def run():
     #   display      - set to False to disable the GUI if PyGame is enabled
     #   log_metrics  - set to True to log trial and simulation results to /logs
     #   optimized    - set to True to change the default log file name
-    sim = Simulator(env, display=False, update_delay=0.0, log_metrics=True, optimized=True)
+    sim = Simulator(env, display=False, update_delay=0.0, log_metrics=True, optimized=False)
     
     ##############
     # Run the simulator
     # Flags:
     #   tolerance  - epsilon tolerance before beginning testing, default is 0.05 
     #   n_test     - discrete number of testing trials to perform, default is 0
-    sim.run(n_test=200, tolerance=0.005)
+    sim.run(n_test=10, tolerance=0.05)
 
 
 if __name__ == '__main__':
