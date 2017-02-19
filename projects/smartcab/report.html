@@ -19697,7 +19697,7 @@ By the way, the policy can avoid a rear-end collision which is occurred by stopp
 As the example above, moving towards the goal would theoreitcally yield better rewards if there is an additional reward for reaching the goal. But, there is no additional reward for reaching the goal because of follows:</p>
 <ol>
 <li>The experiences about route, which be earned in a current trial, doesn't work in next environment because everything in the environment are different to other trials.</li>
-<li>The Smartcab can't recognize the location of itself or be punished by the stress of finishing a current trail therefore the Smartcab doesn't even want to reach goal. Given many tirals to learn, the Smartcab might try to ignore <em><code>'waypoint'</code></em> for earning more rewards from complying with traffic signal.</li>
+<li>The Smartcab can't recognize the location of itself therefore the rewards of reaching goal never be propagated. The distance between the agent and goal doesn't apply here.</li>
 </ol>
 
 </div>
